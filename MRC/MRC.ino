@@ -4,14 +4,21 @@
 #include "include/Pin_assignments.h"
 #include "include/Hardware.h"
 
+//------------------------------------------------//
+// Create objects
 Motors LeftSideMotors;
 Motors RightSideMotors;
 
 Servo servo1, servo2;
 SoftwareSerial HC06(BLUETOOTH_RX, BLUETOOTH_TX);
+//------------------------------------------------//
+
 
 void setup(){
+    
     Init_Hardware(&RightSideMotors, &LeftSideMotors, &servo1, &servo2, &HC06);
+
+
 
 }
 
