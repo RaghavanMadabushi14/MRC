@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <SoftwareSerial.h>
 #include "Pin_assignments.h"
 #include "Hardware.h"
 
@@ -32,8 +31,7 @@ void Init_Bottom_Servo(servo* MyServo){
     MyServo->servo_control = SERVO_2;
 }
 
-SoftwareSerial Init_hc06(hc06* MyHC06){
+void Init_hc06(hc06* MyHC06){
     MyHC06->rx = BLUETOOTH_RX;
     MyHC06->tx = BLUETOOTH_TX;
-    return(SoftwareSerial(2,3))
 }
