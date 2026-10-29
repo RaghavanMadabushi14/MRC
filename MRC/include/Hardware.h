@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <SoftwareSerial.h>
 #include "Pin_assignments.h"
 
 typedef struct{
