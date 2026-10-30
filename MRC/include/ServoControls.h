@@ -1,3 +1,3 @@
 #include <stdio.h>
-#include "include/Pin_assignments.h"
-#include "include/Hardware.h"
+#include "Pin_assignments.h"
+#include "Hardware.h"
