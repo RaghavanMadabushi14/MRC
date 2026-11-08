@@ -110,10 +110,12 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         //check which servos
         if (Word2 == "bottom"){
             MoveServo(&ServoA, value);
+            Bluetooth_Write(&Bluetooth, "OK bottom servo moved");
             return;
         }
         else if (Word2 == "top"){
             MoveServo(&ServoB, value);
+            Bluetooth_Write(&Bluetooth, "OK Top servo moved");
             return;
         }
         else{
