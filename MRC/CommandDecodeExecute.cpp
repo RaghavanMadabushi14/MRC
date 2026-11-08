@@ -55,16 +55,22 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         if (Word2 == "both"){
             //Move both sides at speed value
 
+            return;
         }
         else if (Word2 == "left"){
             //Move left side at speed value
 
+            return;
         }
         else if(Word2 == "right"){
             //Move right side at speed value
+            
+            return;
         }
         else if(word2 == "stop"){
             //Stop both motors
+
+            return;
         }
         else{
             //error sender
