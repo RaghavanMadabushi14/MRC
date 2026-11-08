@@ -63,6 +63,9 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         else if(Word2 == "right"){
             //Move right side at speed value
         }
+        else if(word2 == "stop"){
+            //Stop both motors
+        }
         else{
             //error sender
             Bluetooth_Write(&Bluetooth, "Motor(s) not detected");
