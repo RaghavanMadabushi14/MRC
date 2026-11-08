@@ -3,6 +3,8 @@
 #include <Servo.h>
 #include "Pin_assignments.h"
 
+#pragma once
+
 typedef struct{
   int IN13;
   int IN24;

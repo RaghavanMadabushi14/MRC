@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include "Pin_assignments.h"
+#include <SoftwareSerial.h>
 #include "Hardware.h"
+
+#pragma once
 
 String Bluetooth_Read(SoftwareSerial* BTdevice);
 

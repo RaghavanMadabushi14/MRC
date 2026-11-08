@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
+#include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
 #include "include/Hardware.h"
+
+#pragma once
 
 //------------------------------------------------//
 // Create objects
@@ -18,10 +21,9 @@ void setup(){
     
     Init_Hardware(&RightSideMotors, &LeftSideMotors, &servo1, &servo2, &HC06);
 
-
-
 }
 
 void loop(){
-
+    String BTcommand = Bluetooth_Read(&HC06); //read command
+    
 }

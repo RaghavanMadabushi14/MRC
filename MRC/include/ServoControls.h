@@ -1,3 +1,6 @@
 #include <stdio.h>
-#include "Pin_assignments.h"
-#include "Hardware.h"
+#include <Servo.h>
+
+#pragma once
+
+void MoveServo(Servo* myServo, int angle);
