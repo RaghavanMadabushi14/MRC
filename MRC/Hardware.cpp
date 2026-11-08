@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Ardunio.h>
 #include <Arduino.h>
 #include <stdio.h>
 #include <Servo.h>
@@ -21,17 +22,28 @@ void Init_Right_Motors(Motors* MotorsRightSide){
     MotorsRightSide->IN13 = RIGHT_MOTORS_IN13;
     MotorsRightSide->IN24 = RIGHT_MOTORS_IN24;
     MotorsRightSide->EN = EN_MOTORS_RIGHT;
+    
+    digitalWrite(MotorsRightSide->IN13, LOW);
+    digitalWrite(MotorsRightSide->IN24, LOW);
+    digitalWrite(MotorsRightSide->EN, 0);
 }
 
 void Init_Left_Motors(Motors* MotorsLeftSide){
     MotorsLeftSide->IN13 = LEFT_MOTORS_IN13;
     MotorsLeftSide->IN24 = LEFT_MOTORS_IN24;
     MotorsLeftSide->EN = EN_MOTORS_LEFT;
+
+    digitalWrite(MotorsLeftSide->IN13, LOW);
+    digitalWrite(MotorsLeftSide->IN24, LOW);
+    digitalWrite(MotorsLeftSide->EN, 0);
 }
 
 void Init_Servos(Servo* servo_a, Servo* servo_b){
     (*servo_a).attach(SERVO_1);
     (*servo_b).attach(SERVO_2);
+
+    (*servo_a).write(90);
+    (*servo_b).write(90);
 }
 
 void Init_Bluetooth(SoftwareSerial* BTdevice){
