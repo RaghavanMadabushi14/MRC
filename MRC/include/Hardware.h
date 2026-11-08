@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
-#include "Pin_assignments.h"
 
-#pragma once
 
 typedef struct{
   int IN13;

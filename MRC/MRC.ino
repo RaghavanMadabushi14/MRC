@@ -4,8 +4,7 @@
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
 #include "include/Hardware.h"
-
-#pragma once
+#include "include/CommandDecodeExecute"
 
 //------------------------------------------------//
 // Create objects
@@ -25,5 +24,6 @@ void setup(){
 
 void loop(){
     String BTcommand = Bluetooth_Read(&HC06); //read command
-    
+
+    Command_Decode_Execute(BTcommand, &servo1, &servo2, &LeftSideMotors, &RightSideMotors, &HC06);
 }
