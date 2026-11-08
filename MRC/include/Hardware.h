@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>

@@ -1,4 +1,6 @@
+#pragma once
+
 #include <stdio.h>
-#include "include/Hardware.h"
+#include "Hardware.h"
 
 

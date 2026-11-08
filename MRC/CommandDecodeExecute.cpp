@@ -1,14 +1,20 @@
+#pragma once
+
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
-#include "Hardware.h"
-#include "MotorControls.h"
-#include "BluetoothReadWrite.h"
-#include "ServoControls.h"
-#include "Pin_assignments.h"
+#include "include/Hardware.h"
+#include "include/MotorControls.h"
+#include "include/BluetoothReadWrite.h"
+#include "include/ServoControls.h"
+#include "include/Pin_assignments.h"
 
 
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice){
+    if (command == ""){
+            return;
+        }
+
     // remove need for deferencing 
     Servo& ServoA = *Servo_a;
     Servo& ServoB = *Servo_b;

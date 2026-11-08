@@ -1,10 +1,13 @@
+#pragma once
+
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
+#include "include/BluetoothReadWrite.h"
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
 #include "include/Hardware.h"
-#include "include/CommandDecodeExecute"
+#include "include/CommandDecodeExecute.h"
 
 //------------------------------------------------//
 // Create objects

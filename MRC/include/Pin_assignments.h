@@ -1,4 +1,3 @@
-// type: #include "Pin_assignments.h"
 
 // right motors
 #define RIGHT_MOTORS_IN13 12
