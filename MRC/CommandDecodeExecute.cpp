@@ -32,6 +32,10 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     for(int i = 0; i < command.length(); i++){
         if (command.charAt(i) == ' '){
+            if (CommandArrayIndex == 3){
+                Bluetooth_Write(&Bluetooth, "Invalid command: Too many words");
+                return;
+            }
             
             CommandArray[CommandArrayIndex] = command.substring(j, i);
 
