@@ -11,6 +11,10 @@
 
 
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice){
+    // terminal apps often append '\r' or spaces, which would break the == checks
+    command.trim();
+    command.toLowerCase();
+
     if (command == ""){
             return;
         }
@@ -24,7 +28,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     // Seperate Command Words
 
-    // TODO: implement invalid command detection in python control code (giving a >3 word command will do bad things)
+    // TODO: implement invalid command detection in python control code (>3 word commands are rejected below)
     // possible edit to 4 word command structure, if so we will have to implement change in command tree as well
     String CommandArray[3];
     int CommandArrayIndex = 0;
@@ -32,7 +36,11 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     for(int i = 0; i < command.length(); i++){
         if (command.charAt(i) == ' '){
-            
+            if (CommandArrayIndex == 2){
+                Bluetooth_Write(&Bluetooth, "Too many words in command");
+                return;
+            }
+
             CommandArray[CommandArrayIndex] = command.substring(j, i);
 
             CommandArrayIndex++;
@@ -54,22 +62,33 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         //check which side(s)
         if (Word2 == "both"){
             //Move both sides at speed value
-
+            Motors_Tank(&Left, &Right, value, value);
+            Bluetooth_Write(&Bluetooth, "OK both " + String(value));
             return;
         }
         else if (Word2 == "left"){
             //Move left side at speed value
-
+            Motors_Drive(&Left, value, LEFT_MOTORS_REVERSED);
+            Bluetooth_Write(&Bluetooth, "OK left " + String(value));
             return;
         }
         else if(Word2 == "right"){
             //Move right side at speed value
-            
+            Motors_Drive(&Right, value, RIGHT_MOTORS_REVERSED);
+            Bluetooth_Write(&Bluetooth, "OK right " + String(value));
             return;
         }
-        else if(word2 == "stop"){
+        else if(Word2 == "spin"){
+            //Pivot in place, positive = clockwise
+            Motors_Tank(&Left, &Right, value, -value);
+            Bluetooth_Write(&Bluetooth, "OK spin " + String(value));
+            return;
+        }
+        else if(Word2 == "stop"){
             //Stop both motors
-
+            Motors_Stop(&Left);
+            Motors_Stop(&Right);
+            Bluetooth_Write(&Bluetooth, "OK stop");
             return;
         }
         else{
