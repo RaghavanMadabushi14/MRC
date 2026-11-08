@@ -25,7 +25,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     // Seperate Command Words
 
     // TODO: implement invalid command detection in python control code (giving a >3 word command will do bad things)
-
+    // possible edit to 4 word command structure, if so we will have to implement change in command tree as well
     String CommandArray[3];
     int CommandArrayIndex = 0;
     int j = 0;
