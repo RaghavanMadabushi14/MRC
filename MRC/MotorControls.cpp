@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 #include <Arduino.h>
-=======
-#pragma once
-
-#include <Ardunio.h>
->>>>>>> 0e7540e41453f36023817f9c7eb77ce9c3b02fff
 #include <stdio.h>
 #include "include/Hardware.h"
 #include "include/MotorControls.h"

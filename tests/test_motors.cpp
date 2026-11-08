@@ -196,7 +196,14 @@ static void test_cmd_too_many_words(){
     send("move both 150 extra");
     CHECK_EQ(fakeAnalog[Left.EN], -1);
     CHECK_EQ(fakeAnalog[Right.EN], -1);
-    CHECK_STR(bt.lastReply, "Too many words in command");
+    CHECK_STR(bt.lastReply, "Invalid command: Enter only 3 words");
+}
+
+static void test_cmd_single_word_rejected(){
+    setUp();
+    send("move");
+    CHECK_EQ(fakeAnalog[Left.EN], -1);
+    CHECK_STR(bt.lastReply, "Invalid command: Enter 2 or 3 words");
 }
 
 static void test_cmd_bad_side(){
@@ -248,6 +255,7 @@ int main(){
     test_cmd_carriage_return_and_case();
     test_cmd_non_numeric_value_stops();
     test_cmd_too_many_words();
+    test_cmd_single_word_rejected();
     test_cmd_bad_side();
     test_cmd_empty();
     test_cmd_bad_device();

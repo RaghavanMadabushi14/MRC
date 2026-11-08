@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Ardunio.h>
+#include <Arduino.h>
 #include <stdio.h>
 #include <Servo.h>
 
