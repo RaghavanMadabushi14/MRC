@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Ardunio.h>
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
@@ -36,17 +37,31 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     for(int i = 0; i < command.length(); i++){
         if (command.charAt(i) == ' '){
+<<<<<<< HEAD
             if (CommandArrayIndex == 2){
                 Bluetooth_Write(&Bluetooth, "Too many words in command");
                 return;
             }
 
+=======
+            if (CommandArrayIndex == 3){
+                Bluetooth_Write(&Bluetooth, "Invalid command: Enter only 3 words");
+                return;
+            }
+            
+>>>>>>> 0e7540e41453f36023817f9c7eb77ce9c3b02fff
             CommandArray[CommandArrayIndex] = command.substring(j, i);
 
             CommandArrayIndex++;
             j = i + 1;
         }
     }
+    
+    if (CommandArrayIndex < 2){
+        Bluetooth_Write(&Bluetooth, "Invalid command:: Enter 3 words");
+        return;
+    }
+    
     CommandArray[CommandArrayIndex] = command.substring(j);
     
     String Word1 = CommandArray[0];

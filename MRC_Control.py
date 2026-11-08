@@ -1,7 +1,9 @@
 import serial
 import time
-ser = serial.Serial('COM7', 9600, timeout=2)
+ser = serial.Serial("/dev/cu.team3Module", 9600, timeout=2)
 print(f"Connected to {ser.port}")
+# HC-06 link needs a moment after the port opens before data flows reliably
+time.sleep(2)
 try:
     ser.reset_input_buffer()
     while True:
