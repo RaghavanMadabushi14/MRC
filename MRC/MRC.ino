@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
+#include "include/MotorControls.h"
 #include "include/BluetoothReadWrite.h"
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
