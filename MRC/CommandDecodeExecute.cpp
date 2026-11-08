@@ -33,7 +33,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     for(int i = 0; i < command.length(); i++){
         if (command.charAt(i) == ' '){
             if (CommandArrayIndex == 3){
-                Bluetooth_Write(&Bluetooth, "Invalid command: Too many words");
+                Bluetooth_Write(&Bluetooth, "Invalid command: Enter only 3 words");
                 return;
             }
             
@@ -43,6 +43,12 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
             j = i + 1;
         }
     }
+    
+    if (CommandArrayIndex < 2){
+        Bluetooth_Write(&Bluetooth, "Invalid command:: Enter 3 words");
+        return;
+    }
+    
     CommandArray[CommandArrayIndex] = command.substring(j);
     
     String Word1 = CommandArray[0];
