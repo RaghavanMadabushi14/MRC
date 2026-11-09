@@ -49,7 +49,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
     }
     
-    if (CommandArrayIndex < 1){
+    if (CommandArrayIndex != 2){
         Bluetooth_Write(&Bluetooth, "Invalid command: Enter 2 or 3 words");
         return;
     }
