@@ -17,23 +17,13 @@ void Motors_Drive(Motors* side, int speed, bool reversed){
         return;
     }
 
-    if (reversed){
-        speed = -speed;
-    }
-
     int magnitude = abs(speed);
     if (magnitude < MOTOR_MIN_PWM){
         magnitude = MOTOR_MIN_PWM;
     }
-
-    if (speed > 0){
-        digitalWrite(side->IN13, HIGH);
-        digitalWrite(side->IN24, LOW);
-    }
-    else{
-        digitalWrite(side->IN13, LOW);
-        digitalWrite(side->IN24, HIGH);
-    }
+    
+    digitalWrite(side->IN13, LOW);
+    digitalWrite(side->IN24, HIGH);
     analogWrite(side->EN, magnitude);
 }
 
