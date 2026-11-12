@@ -6,7 +6,8 @@
 
 #define MOTOR_MAX_PWM 255
 #ifndef MOTOR_MIN_PWM
-#define MOTOR_MIN_PWM 0          // tune on robot: lowest PWM that actually turns the wheels
+#define MOTOR_MIN_PWM 0 
+#endif         // tune on robot: lowest PWM that actually turns the wheels
 
 // speed is signed: positive = forward, negative = reverse, 0 = coast stop. Range -255..255 (clamped)
 void Motors_Drive(Motors* side, int speed);
