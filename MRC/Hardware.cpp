@@ -24,7 +24,7 @@ void Init_Right_Motors(Motors* MotorsRightSide){
     
     digitalWrite(MotorsRightSide->IN13, LOW);
     digitalWrite(MotorsRightSide->IN24, LOW);
-    digitalWrite(MotorsRightSide->EN, 0);
+    analogWrite(MotorsRightSide->EN, 0);
 }
 
 void Init_Left_Motors(Motors* MotorsLeftSide){
@@ -34,7 +34,7 @@ void Init_Left_Motors(Motors* MotorsLeftSide){
 
     digitalWrite(MotorsLeftSide->IN13, LOW);
     digitalWrite(MotorsLeftSide->IN24, LOW);
-    digitalWrite(MotorsLeftSide->EN, 0);
+    analogWrite(MotorsLeftSide->EN, 0);
 }
 
 void Init_Servos(Servo* servo_a, Servo* servo_b){
