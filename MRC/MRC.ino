@@ -32,6 +32,8 @@ void setup(){
 void loop(){
     String BTcommand = Bluetooth_Read(&HC06); //read command
 
+    if (BTcommand == "") return;
+
     //decode and execute command
     Command_Decode_Execute(BTcommand, &servo1, &servo2, &LeftSideMotors, &RightSideMotors, &HC06);
 }

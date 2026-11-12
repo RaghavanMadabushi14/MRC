@@ -16,10 +16,6 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     command.trim();
     command.toLowerCase();
 
-    if (command == ""){
-            return;
-        }
-
     // remove need for deferencing 
     Servo& ServoA = *Servo_a;
     Servo& ServoB = *Servo_b;
