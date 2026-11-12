@@ -71,13 +71,13 @@ void Motors_Rotate_Angle(Motors* left_side, Motors* right_side, float angle_degr
 
     unsigned long time_ms = angle_to_time(fabs(angle_degrees), DEFAULT_PWM)*1000;
 
-    bool clockwise = (angle_degrees > 0);
+    bool anticlockwise = (angle_degrees < 0);
     
-    if (clockwise){
-        Motors_Tank(left_side, right_side, DEFAULT_PWM, -DEFAULT_PWM);
+    if (anticlockwise){
+        Motors_Tank(left_side, right_side, -DEFAULT_PWM, DEFAULT_PWM);
     }
     else {
-        Motors_Tank(left_side, right_side, -DEFAULT_PWM, DEFAULT_PWM);
+        Motors_Tank(left_side, right_side, DEFAULT_PWM, -DEFAULT_PWM);
     }
 
     delay(time_ms);
