@@ -4,7 +4,7 @@
 #include "include/MotorControls.h"
 
 
-void Motors_Drive(Motors* side, int speed, bool reversed){
+void Motors_Drive(Motors* side, int speed){
     if (speed > MOTOR_MAX_PWM){
         speed = MOTOR_MAX_PWM;
     }
