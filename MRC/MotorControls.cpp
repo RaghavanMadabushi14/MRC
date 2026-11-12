@@ -34,6 +34,6 @@ void Motors_Stop(Motors* side){
 }
 
 void Motors_Tank(Motors* left, Motors* right, int leftSpeed, int rightSpeed){
-    Motors_Drive(left, leftSpeed, LEFT_MOTORS_REVERSED);
-    Motors_Drive(right, rightSpeed, RIGHT_MOTORS_REVERSED);
+    Motors_Drive(left, leftSpeed);
+    Motors_Drive(right, rightSpeed);
 }
