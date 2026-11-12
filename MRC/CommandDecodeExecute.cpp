@@ -75,13 +75,13 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
         else if (Word2 == "left"){
             //Move left side at speed value
-            Motors_Drive(&Left, value, LEFT_MOTORS_REVERSED);
+            Motors_Drive(&Left, value);
             Bluetooth_Write(&Bluetooth, "OK left " + String(value));
             return;
         }
         else if(Word2 == "right"){
             //Move right side at speed value
-            Motors_Drive(&Right, value, RIGHT_MOTORS_REVERSED);
+            Motors_Drive(&Right, value);
             Bluetooth_Write(&Bluetooth, "OK right " + String(value));
             return;
         }
