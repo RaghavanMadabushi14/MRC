@@ -43,7 +43,7 @@ void Motors_Tank(Motors* left, Motors* right, int leftSpeed, int rightSpeed){
 }
 
 
-float ms_to_time(float distance_m, int PWM); // TODO
+float m_to_time(float distance_m, int PWM); // TODO
 
 float angle_to_time(float angle_degrees, int PWM); // TODO
 
