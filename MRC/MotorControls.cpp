@@ -51,7 +51,7 @@ void Motors_Move_Distance(Motors* left_side, Motors* right_side, float distance_
 
     if (distance_m == 0) return;
     
-    unsigned long time_ms = ms_to_time(fabs(distance_m), DEFAULT_PWM)*1000;
+    unsigned long time_ms = m_to_time(fabs(distance_m), DEFAULT_PWM)*1000;
     
     if (distance_m > 0){
         Motors_Tank(left_side, right_side, DEFAULT_PWM, DEFAULT_PWM);
