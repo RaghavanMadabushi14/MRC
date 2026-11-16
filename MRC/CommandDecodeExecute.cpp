@@ -29,6 +29,11 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     for(int i = 0; i < command.length(); i++){
         if (command.charAt(i) == ' '){
+            if (i == j){
+                j++;
+                continue;
+            }
+            
             if (CommandArrayIndex == 2){
                 Bluetooth_Write(BTdevice, "Invalid command: Enter 3 words");
                 return;
@@ -50,7 +55,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     
     String Word1 = CommandArray[0];
     String Word2 = CommandArray[1];
-    float Word3 = CommandArray[2];
+    String Word3 = CommandArray[2];
     
     //command tree
 
@@ -100,12 +105,12 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         //check which servos
         if (Word2 == "bottom"){
             MoveServo(Servo_a, Word3_value);
-            Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(Word3_value));
+            Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(Word3_value) + " degrees");
             return;
         }
         else if (Word2 == "top"){
             MoveServo(Servo_b, Word3_value);
-            Bluetooth_Write(BTdevice, "Top servo moved to" + String(Word3_value));
+            Bluetooth_Write(BTdevice, "Top servo moved to" + String(Word3_value) + " degrees");
             return;
         }
         else{
