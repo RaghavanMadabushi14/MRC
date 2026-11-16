@@ -21,5 +21,6 @@ String Bluetooth_Read(SoftwareSerial* BTdevice){
 }
 
 void Bluetooth_Write(SoftwareSerial* BTdevice, String Response){
-    Serial.println(Response);
+    if (YesSerial) Serial.println(Response);
+    else (*BTdevice).println(Response);
 }
