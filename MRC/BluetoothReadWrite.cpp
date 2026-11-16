@@ -25,6 +25,6 @@ void Bluetooth_Write(SoftwareSerial* BTdevice, String Response){
     else (*BTdevice).println(Response);
 }
 
-void Serial_Bluetooth_Switch(bool YesSerialControl){
-    if (YesSerialControl = True) YesSerial = !YesSerial;
+void Serial_Bluetooth_Switch(){
+    YesSerial = !YesSerial;
 }
