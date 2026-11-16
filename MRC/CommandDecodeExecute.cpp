@@ -105,6 +105,9 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
             return;
         }
     }
+    else if (Word1 == "servos"){
+        MoveBothServos(Servo_a, Servo_b, Word2.toFloat(), value);
+    }
     else{
         Bluetooth_Write(BTdevice, "Device type not detected");
         return;
