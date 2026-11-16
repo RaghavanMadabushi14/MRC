@@ -11,6 +11,8 @@
 #include "include/Hardware.h"
 #include "include/CommandDecodeExecute.h"
 
+
+int YesSerial = true;
 //------------------------------------------------//
 // Create objects
 Motors LeftSideMotors;
