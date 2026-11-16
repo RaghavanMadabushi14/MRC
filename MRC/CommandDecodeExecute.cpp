@@ -10,6 +10,9 @@
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
 
+bool Valid_toFloat(String num_maybe){
+    
+}
 
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice){
     // terminal apps often append '\r' or spaces, which would break the == checks
