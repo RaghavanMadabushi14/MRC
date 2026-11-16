@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <SoftwareSerial.h>
 #include "include/BluetoothReadWrite.h"
+#include "include/CommConfig.h"
 
 String Bluetooth_Read(SoftwareSerial* BTdevice){
     if (YesSerial){
