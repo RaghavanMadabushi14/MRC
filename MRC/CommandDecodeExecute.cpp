@@ -106,7 +106,13 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
     }
     else if (Word1 == "servos"){
-        MoveBothServos(Servo_a, Servo_b, Word2.toFloat(), value);
+        float Word2_value = Word2.toFloat();
+        if ( (value < 0) || (value > 180) || (Word2_value < 0) || (Word2_value > 180) ){
+            Bluetooth_Write(BTdevice, "Error: move servos between 0 and 180 degrees");
+            return;
+        }
+        MoveBothServos(Servo_a, Servo_b, Word2_value, value);
+        Bluetooth_Write(BTdevice, "Both servos moved to " + String(Word2_value) + " and " + String(value) + " degrees");
     }
     else{
         Bluetooth_Write(BTdevice, "Device type not detected");
