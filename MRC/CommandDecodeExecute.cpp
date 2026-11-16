@@ -78,7 +78,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
         else{
             //error sender
-            Bluetooth_Write(BTdevice, "Motor(s) not detected");
+            Bluetooth_Write(BTdevice, "Movement mode not detected");
             return;
         }
     }
@@ -92,12 +92,12 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         //check which servos
         if (Word2 == "bottom"){
             MoveServo(Servo_a, value);
-            Bluetooth_Write(BTdevice, "OK bottom servo moved");
+            Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(value));
             return;
         }
         else if (Word2 == "top"){
             MoveServo(Servo_b, value);
-            Bluetooth_Write(BTdevice, "OK Top servo moved");
+            Bluetooth_Write(BTdevice, "Top servo moved to" + String(value));
             return;
         }
         else{
