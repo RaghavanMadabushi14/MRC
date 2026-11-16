@@ -6,4 +6,6 @@
 #include <Servo.h>
 #include "Hardware.h"
 
+bool Valid_toFloat(String);
+
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice);
