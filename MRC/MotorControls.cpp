@@ -48,7 +48,7 @@ float m_to_time(float distance_m, int PWM){
 }
 
 float angle_to_time(float angle_degrees, int PWM){
-    return angle_degrees*0.01765;
+    return angle_degrees * 0.01765;
 }
 
 void Motors_Move_Distance(Motors* left_side, Motors* right_side, float distance_m){
