@@ -7,5 +7,3 @@
 String Bluetooth_Read(SoftwareSerial* BTdevice);
 
 void Bluetooth_Write(SoftwareSerial* BTdevice, String Respone);
-
-void Serial_Bluetooth_Switch(bool YesSerialControl);
