@@ -12,7 +12,7 @@
 #include "include/CommandDecodeExecute.h"
 
 
-int YesSerial = true;
+const bool YesSerial = true;
 //------------------------------------------------//
 // Create objects
 Motors LeftSideMotors;
