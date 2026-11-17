@@ -10,6 +10,13 @@
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
 
+FirstWordEnum DeviceSwitchInput(String device){
+    if (device == "move") return MOVE;
+    if (device == "servo") return SERVO;
+    if (device == "servos") return SERVOS;
+    else return NONE;
+}
+
 bool Valid_toFloat(String num_maybe){
     // maybe will do (?)
 }
@@ -56,82 +63,73 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     String Word1 = CommandArray[0];
     String Word2 = CommandArray[1];
     String Word3 = CommandArray[2];
+
+    float Word3_value = Word3.toFloat();
     
     //command tree
 
-    //check if motor or servo control
-    if (Word1 == "move"){
-        // motors
-
-        float Word3_value = Word3.toFloat();
-
-        //check which side(s)
-        if (Word2 == "walk"){
-            //Move both sides at speed value
-            if (fabs(Word3_value) > 3){
-                Bluetooth_Write(BTdevice, "Error: move only under 3 meters");
+    FirstWordEnum DeviceInstructionEnum = DeviceSwitchInput(Word1);
+    switch(DeviceInstructionEnum){
+        case MOVE:
+            if (Word2 == "walk")
+            {
+                if (fabs(Word3_value) > 3){
+                    Bluetooth_Write(BTdevice, "Error: move only under 3 meters");
+                    return;
+                }
+                Motors_Move_Distance(LeftMotors, RightMotors, Word3_value);
+                Bluetooth_Write(BTdevice, "OK move " + String(Word3_value) + " meters");
                 return;
             }
-            Motors_Move_Distance(LeftMotors, RightMotors, Word3_value);
-            Bluetooth_Write(BTdevice, "OK move " + String(Word3_value) + " meters");
-            return;
-        }
-        else if(Word2 == "spin"){
-            //Pivot in place, positive = clockwise
-            if (fabs(Word3_value) > 360) {
-                Bluetooth_Write(BTdevice, "Error: rotate between -360 and 360 degrees");
+            else if(Word2 == "spin")
+            {
+                if (fabs(Word3_value) > 360){
+                    Bluetooth_Write(BTdevice, "Error: rotate between -360 and 360 degrees");
+                    return;
+                }
+                Motors_Rotate_Angle(LeftMotors, RightMotors, Word3_value);
+                Bluetooth_Write(BTdevice, "OK spin " + String(Word3_value) + " degrees");
                 return;
             }
-            Motors_Rotate_Angle(LeftMotors, RightMotors, Word3_value);
-            Bluetooth_Write(BTdevice, "OK spin " + String(Word3_value) + " degrees");
-            return;
-        }
-        else{
-            //error sender
-            Bluetooth_Write(BTdevice, "Movement mode not detected");
-            return;
-        }
-    }
-    else if (Word1 == "servo"){
-        // servos
+            else
+            {
+                //error sender
+                Bluetooth_Write(BTdevice, "Movement mode not detected");
+                return;
+            }
 
-        float Word3_value = Word3.toFloat();
-        
-        if ( (Word3_value < 0) || (Word3_value > 180) ){
-            Bluetooth_Write(BTdevice, "Error: move servo between 0 and 180 degrees");
-            return;
-        }
+        case SERVO:
+            if ( (Word3_value < 0) || (Word3_value > 180) ){
+                Bluetooth_Write(BTdevice, "Error: move servo between 0 and 180 degrees");
+                return;
+            }
+            if (Word2 == "bottom"){
+                MoveServo(Servo_a, Word3_value);
+                Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(Word3_value) + " degrees");
+                return;
+            }
+            else if (Word2 == "top"){
+                MoveServo(Servo_b, Word3_value);
+                Bluetooth_Write(BTdevice, "Top servo moved to" + String(Word3_value) + " degrees");
+                return;
+            }
+            else{
+                Bluetooth_Write(BTdevice, "Servo not detected");
+                return;
+            }
 
-        //check which servos
-        if (Word2 == "bottom"){
-            MoveServo(Servo_a, Word3_value);
-            Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(Word3_value) + " degrees");
+        case SERVOS:
+            float Word2_value = Word2.toFloat();
+            
+            if ( (Word3_value < 0) || (Word3_value > 180) || (Word2_value < 0) || (Word2_value > 180) ){
+                Bluetooth_Write(BTdevice, "Error: move servos between 0 and 180 degrees");
+                return;
+            }
+            MoveBothServos(Servo_a, Servo_b, Word2_value, Word3_value);
+            Bluetooth_Write(BTdevice, "Both servos moved to " + String(Word2_value) + " and " + String(Word3_value) + " degrees");
             return;
-        }
-        else if (Word2 == "top"){
-            MoveServo(Servo_b, Word3_value);
-            Bluetooth_Write(BTdevice, "Top servo moved to" + String(Word3_value) + " degrees");
-            return;
-        }
-        else{
-            Bluetooth_Write(BTdevice, "Servo not detected");
-            return;
-        }
+            
+        case NONE:
+            Bluetooth_Write(BTdevice, "Device type not detected");
+            return;            
     }
-    else if (Word1 == "servos"){
-        
-        float Word2_value = Word2.toFloat();
-        float Word3_value = Word3.toFloat();
-
-        if ( (Word3_value < 0) || (Word3_value > 180) || (Word2_value < 0) || (Word2_value > 180) ){
-            Bluetooth_Write(BTdevice, "Error: move servos between 0 and 180 degrees");
-            return;
-        }
-        MoveBothServos(Servo_a, Servo_b, Word2_value, Word3_value);
-        Bluetooth_Write(BTdevice, "Both servos moved to " + String(Word2_value) + " and " + String(Word3_value) + " degrees");
-    }
-    else{
-        Bluetooth_Write(BTdevice, "Device type not detected");
-        return;
-    }
-}

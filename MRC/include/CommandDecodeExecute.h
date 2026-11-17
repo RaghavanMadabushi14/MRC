@@ -6,6 +6,15 @@
 #include <Servo.h>
 #include "Hardware.h"
 
+enum FirstWordEnum{
+    MOVE,
+    SERVO,
+    SERVOS,
+    NONE 
+}
+
+FirstWordEnum DeviceSwitchInput(String device);
+
 bool Valid_toFloat(String num_maybe);
 
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice);
