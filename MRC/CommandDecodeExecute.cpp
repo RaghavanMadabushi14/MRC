@@ -146,12 +146,12 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
             }
             if (Word2 == "bottom"){
                 MoveServo(Servo_a, Word3_value);
-                Bluetooth_Write(BTdevice, "Bottom servo moved to" + String(Word3_value) + " degrees");
+                Bluetooth_Write(BTdevice, "Bottom servo moved to " + String(Word3_value) + " degrees");
                 return;
             }
             else if (Word2 == "top"){
                 MoveServo(Servo_b, Word3_value);
-                Bluetooth_Write(BTdevice, "Top servo moved to" + String(Word3_value) + " degrees");
+                Bluetooth_Write(BTdevice, "Top servo moved to " + String(Word3_value) + " degrees");
                 return;
             }
             else{
