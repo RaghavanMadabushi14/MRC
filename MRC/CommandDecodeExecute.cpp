@@ -11,11 +11,34 @@ FirstWordEnum DeviceSwitchInput(String device){
     if (device == "move") return MOVE;
     if (device == "servo") return SERVO;
     if (device == "servos") return SERVOS;
-    else return NONE;
+    return NONE;
 }
 
-bool Valid_toFloat(String num_maybe){
-    // maybe will do (?)
+bool isNumeric(String str){
+    if (str.length() == 0) return false;
+    
+    bool hasDecimal = false;
+    bool hasDigit = false;
+    unsigned int start = 0;
+    
+    // Allow a leading minus or plus sign
+    if (str.charAt(0) == '-' || str.charAt(0) == '+'){
+    start = 1;
+    }
+    
+    for (unsigned int i = start; i < str.length(); i++) {
+        char c = str.charAt(i);
+        if (isDigit(c)){
+            hasDigit = true;
+        }
+        else if (c == '.' && !hasDecimal){
+            hasDecimal = true; // Allow only one decimal point
+        }
+        else{
+            return false; // Invalid character found
+        }
+    }
+    return hasDigit; // Ensures strings like "-" or "." return false
 }
 
 void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Motors* LeftMotors, Motors* RightMotors, SoftwareSerial* BTdevice){
@@ -61,13 +84,21 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     String Word2 = CommandArray[1];
     String Word3 = CommandArray[2];
 
-    float Word3_value = Word3.toFloat();
-    
+
     //command tree
 
     FirstWordEnum DeviceInstructionEnum = DeviceSwitchInput(Word1);
     switch(DeviceInstructionEnum){
         case MOVE:{
+            float Word3_value;
+            if (isNumeric(Word3)){
+                Word3_value = Word3.toFloat();
+            }
+            else{
+                Bluetooth_Write(BTdevice, "Type valid value(s)");
+                return;
+            }
+            
             if (Word3_value == 0){
                 Bluetooth_Write(BTdevice, "dumbass");
             }
@@ -100,6 +131,15 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
 
         case SERVO:{
+            float Word3_value;
+            if (isNumeric(Word3)){
+                Word3_value = Word3.toFloat();
+            }
+            else{
+                Bluetooth_Write(BTdevice, "Type valid value(s)");
+                return;
+            }
+            
             if ( (Word3_value < 0) || (Word3_value > 180) ){
                 Bluetooth_Write(BTdevice, "Error: move servo between 0 and 180 degrees");
                 return;
@@ -121,8 +161,17 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         }
 
         case SERVOS:{
-            float Word2_value = Word2.toFloat();
-            
+            float Word2_value;
+            float Word3_value;
+            if (isNumeric(Word3) && isNumeric(Word3){
+                Word2_value = Word2.toFloat();
+                Word3_value = Word3.toFloat();
+            }
+            else{
+                Bluetooth_Write(BTdevice, "Type valid value(s)");
+                return;
+            }
+                 
             if ( (Word3_value < 0) || (Word3_value > 180) || (Word2_value < 0) || (Word2_value > 180) ){
                 Bluetooth_Write(BTdevice, "Error: move servos between 0 and 180 degrees");
                 return;
