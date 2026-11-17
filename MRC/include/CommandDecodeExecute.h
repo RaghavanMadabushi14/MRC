@@ -11,7 +11,7 @@ enum FirstWordEnum{
     SERVO,
     SERVOS,
     NONE 
-}
+};
 
 FirstWordEnum DeviceSwitchInput(String device);
 

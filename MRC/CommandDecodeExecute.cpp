@@ -9,6 +9,7 @@
 #include "include/BluetoothReadWrite.h"
 #include "include/ServoControls.h"
 #include "include/Pin_assignments.h"
+#include "include/CommandDecodeExecute.h"
 
 FirstWordEnum DeviceSwitchInput(String device){
     if (device == "move") return MOVE;
@@ -133,3 +134,4 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
             Bluetooth_Write(BTdevice, "Device type not detected");
             return;            
     }
+}

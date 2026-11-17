@@ -1,1 +1,0 @@
-extern const bool YesSerial;
