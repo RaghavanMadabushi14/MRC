@@ -163,7 +163,7 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
         case SERVOS:{
             float Word2_value;
             float Word3_value;
-            if (isNumeric(Word3) && isNumeric(Word3)){
+            if (isNumeric(Word3) || isNumeric(Word3)){
                 Word2_value = Word2.toFloat();
                 Word3_value = Word3.toFloat();
             }
