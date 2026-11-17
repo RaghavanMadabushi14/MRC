@@ -8,7 +8,7 @@
 
 
 void Motors_Drive(Motors* side, float speed){
-
+    /* default speed renders useless edge case handlers
     // enforce PWM limits
     speed = (speed > MOTOR_MAX_PWM) ? MOTOR_MAX_PWM : (speed < -MOTOR_MAX_PWM) ? -MOTOR_MAX_PWM : speed;
 
@@ -16,7 +16,7 @@ void Motors_Drive(Motors* side, float speed){
         Motors_Stop(side);
         return;
     }
-
+    */
     int magnitude = abs(speed);
     
     if (speed > 0){

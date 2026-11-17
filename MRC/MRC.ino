@@ -2,12 +2,8 @@
 
 #include <Arduino.h>
 #include <stdio.h>
-#include <SoftwareSerial.h>
-#include <Servo.h>
-#include "include/MotorControls.h"
+#include "include/Pin_Assignments.h"
 #include "include/BluetoothReadWrite.h"
-#include "include/ServoControls.h"
-#include "include/Pin_assignments.h"
 #include "include/Hardware.h"
 #include "include/CommandDecodeExecute.h"
 

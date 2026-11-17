@@ -2,13 +2,9 @@
 
 #include <Arduino.h>
 #include <stdio.h>
-#include <SoftwareSerial.h>
-#include <Servo.h>
-#include "include/Hardware.h"
 #include "include/MotorControls.h"
 #include "include/BluetoothReadWrite.h"
 #include "include/ServoControls.h"
-#include "include/Pin_assignments.h"
 #include "include/CommandDecodeExecute.h"
 
 FirstWordEnum DeviceSwitchInput(String device){
@@ -71,7 +67,10 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
 
     FirstWordEnum DeviceInstructionEnum = DeviceSwitchInput(Word1);
     switch(DeviceInstructionEnum){
-        case MOVE:
+        case MOVE:{
+            if (Word3_value == 0){
+                Bluetooth_Write(BTdevice, "dumbass");
+            }
             if (Word2 == "walk")
             {
                 if (fabs(Word3_value) > 3){
@@ -98,8 +97,9 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
                 Bluetooth_Write(BTdevice, "Movement mode not detected");
                 return;
             }
+        }
 
-        case SERVO:
+        case SERVO:{
             if ( (Word3_value < 0) || (Word3_value > 180) ){
                 Bluetooth_Write(BTdevice, "Error: move servo between 0 and 180 degrees");
                 return;
@@ -118,8 +118,9 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
                 Bluetooth_Write(BTdevice, "Servo not detected");
                 return;
             }
+        }
 
-        case SERVOS:
+        case SERVOS:{
             float Word2_value = Word2.toFloat();
             
             if ( (Word3_value < 0) || (Word3_value > 180) || (Word2_value < 0) || (Word2_value > 180) ){
@@ -129,9 +130,11 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
             MoveBothServos(Servo_a, Servo_b, Word2_value, Word3_value);
             Bluetooth_Write(BTdevice, "Both servos moved to " + String(Word2_value) + " and " + String(Word3_value) + " degrees");
             return;
+        }
             
-        case NONE:
+        case NONE:{
             Bluetooth_Write(BTdevice, "Device type not detected");
-            return;            
+            return;
+        }      
     }
 }
