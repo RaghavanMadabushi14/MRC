@@ -17,11 +17,6 @@ Servo servo1, servo2;
 SoftwareSerial HC06(BLUETOOTH_RX, BLUETOOTH_TX);
 //------------------------------------------------//
 
-void softwareReset() {
-  wdt_enable(WDTO_15MS);
-  while (true){}
-}
-
 void setup(){
     
     Init_Hardware(&RightSideMotors, &LeftSideMotors, &servo1, &servo2, &HC06);
