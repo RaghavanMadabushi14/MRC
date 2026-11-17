@@ -22,7 +22,7 @@ void setup(){
     
     Init_Hardware(&RightSideMotors, &LeftSideMotors, &servo1, &servo2, &HC06);
 
-    Bluetooth_Write(&HC06, "Initialize complete");
+    Bluetooth_Write(&HC06, "Initialize complete\nCommand format: [Device (move, servo, servos)] [Action (walk, spin, top, bottom) or degree value] [Measurement (meters or degrees)]");
 
 }
 
