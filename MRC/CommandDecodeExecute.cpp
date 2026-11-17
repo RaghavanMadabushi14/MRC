@@ -46,6 +46,10 @@ void Command_Decode_Execute(String command, Servo* Servo_a, Servo* Servo_b, Moto
     command.trim();
     command.toLowerCase();
 
+    if (command = "reset"){
+        softwareReset();
+    }
+
     // Seperate Command Words
 
     // TODO: implement invalid command detection in python control code (>3 word commands are rejected below)
