@@ -45,7 +45,6 @@ void Init_Servos(Servo* servo_a, Servo* servo_b){
 }
 
 void Init_Bluetooth(SoftwareSerial* BTdevice){
-    Serial.begin(9600);
     (*BTdevice).begin(9600);
 }
 
