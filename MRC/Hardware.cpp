@@ -40,7 +40,7 @@ void Init_Servos(Servo* servo_a, Servo* servo_b){
     (*servo_a).attach(SERVO_1);
     (*servo_b).attach(SERVO_2);
 
-    MoveBothServos(servo_a, servo_b, 90, 90
+    MoveBothServos(servo_a, servo_b, 90, 90);
 }
 
 void Init_Bluetooth(SoftwareSerial* BTdevice){
