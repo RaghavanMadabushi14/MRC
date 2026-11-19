@@ -6,6 +6,7 @@
 #include <SoftwareSerial.h>
 #include "include/Pin_assignments.h"
 #include "include/Hardware.h"
+#include "include/ServoControls.cpp"
 
 void MotorsPinModes(){
     pinMode(RIGHT_MOTORS_IN13, OUTPUT);
