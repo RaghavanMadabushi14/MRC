@@ -17,13 +17,13 @@ void MoveServo(Servo* myServo, float angle){
     int direction = (angle > CurrentAngle) ? 1 : -1;
 
     while(true){
-        CurrentAngle += 20 * direction;
+        CurrentAngle += 10 * direction;
         if (direction * (angle - CurrentAngle) <= 0){
             (*myServo).write(angle);
             return;
         }
         (*myServo).write(CurrentAngle);
-        delay(50);
+        delay(100);
     }
 }
 
@@ -41,7 +41,7 @@ void MoveBothServos(Servo* myServo1, Servo* myServo2, float angle1, float angle2
 
     while(true){
         if (!Servo1done){
-            CurrentAngle1 += 20 * direction1;
+            CurrentAngle1 += 10 * direction1;
             if (direction1 * (angle1 - CurrentAngle1) <= 0){
                 (*myServo1).write(angle1);
                 Servo1done = true;
@@ -51,7 +51,7 @@ void MoveBothServos(Servo* myServo1, Servo* myServo2, float angle1, float angle2
             }
         }
         if (!Servo2done){
-            CurrentAngle2 += 20 * direction2;
+            CurrentAngle2 += 10 * direction2;
             if (direction2 * (angle2 - CurrentAngle2) <= 0){
                 (*myServo2).write(angle2);
                 Servo2done = true;
@@ -61,6 +61,6 @@ void MoveBothServos(Servo* myServo1, Servo* myServo2, float angle1, float angle2
             }
         }
         if (Servo1done && Servo2done) return;
-        delay(50);
+        delay(100);
     }
 }
